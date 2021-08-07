@@ -21,7 +21,7 @@ describe('AsyncTransformer', () => {
   });
 
   describe('Execution', () => {
-    it('should execute transformationtions whose condition statifies evaluation', async () => {
+    it('should execute transformationtions whose condition satisfies evaluation', async () => {
       const data = [1, 2, 3];
       const transformer = new AsyncTransformer<Array<number>>()
         .register({
