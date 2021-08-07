@@ -1,7 +1,7 @@
 {
   "name": "@rupakheti/pattern-lib",
-  "version": "1.0.0",
-  "description": "A NodeJs-based reusable pattern library",
+  "version": "0.1.0",
+  "description": "A Javascript-based reusable design pattern library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -10,7 +10,7 @@
   "scripts": {
     "compile": "tsc",
     "build": "tsc && npm-pack-zip",
-    "clean": "rm -rf dist && rm -f @rupakhetipattern-lib.zip",
+    "clean": "rm -rf dist && rm -rf reports && rm -f @rupakhetipattern-lib.zip",
     "watch": "tsc -w",
     "pack": "npm-pack-zip",
     "test": "jest --coverage",

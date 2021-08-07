@@ -1,1 +1,1 @@
-export * as strategy from './strategy';
+export * from './behavior';
