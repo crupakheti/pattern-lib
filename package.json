@@ -1,7 +1,7 @@
 {
   "name": "@rupakheti/pattern-lib",
   "version": "0.1.0",
-  "description": "A Javascript-based reusable design pattern library",
+  "description": "A JS-based reusable design pattern library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [

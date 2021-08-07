@@ -7,13 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.0] - 2021-06-27
+## [0.1.0]
 
 ### Added
 
 - Initial repo setup
-- Github Actions setup
-- Strategy Selector Pattern
+- Strategizer Pattern
+- Transformer Pattern
 
-[unreleased]: https://github.com/crupakheti/pattern-lib/compare/v1.0.0...main
-[1.0.0]: https://github.com/crupakheti/pattern-lib/compare/0a3e811f2f4a6539d...v1.0.0
+[unreleased]: https://github.com/crupakheti/pattern-lib/compare/v0.1.0...main
+[0.1.0]: https://github.com/crupakheti/pattern-lib/compare/0a3e811f2f4a6539d...v0.1.0

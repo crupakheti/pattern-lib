@@ -1,5 +1,5 @@
 /**
- * An abstraction for a execution strategy.
+ * An abstraction for an execution strategy.
  *
  * @param I The data type to apply the strategy to
  * @param O The data type returned after the application of the strategy

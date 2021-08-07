@@ -35,7 +35,7 @@ describe('Strategizer', () => {
   describe('Execution', () => {
     let strategizer: Strategizer<string, string>;
 
-    it('should execute a strategy whose condition statifies evaluation', async () => {
+    it('should execute a strategy whose condition satisfies evaluation', async () => {
       strategizer = new Strategizer<string, string>()
         .register({
           evaluate: (input) => input === 'identity',
