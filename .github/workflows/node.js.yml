@@ -1,0 +1,64 @@
+# This coverage badge for this project was generated using the the techinques described in:
+# https://dev.to/thejaredwilcurt/coverage-badge-with-github-actions-finally-59fa
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+        os: [ubuntu-latest]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }} on ${{ matrix.os }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - run: npm ci
+    - run: npm run build
+    - run: npm run lint
+    - run: npm test
+
+    - if: ${{ matrix.node-version == '14.x' }}
+      name: Get Coverage for Badge
+      run: |
+        SUMMARY="$(npm test -- --coverageReporters='text-summary' | tail -2 | head -1)"
+        TOKENS=($SUMMARY)
+        echo "COVERAGE=$(echo ${TOKENS[2]})" >> $GITHUB_ENV
+
+        REF=${{ github.ref }}
+        echo "github.ref: $REF"
+        IFS='/' read -ra PATHS <<< "$REF"
+        BRANCH_NAME="${PATHS[1]}_${PATHS[2]}"
+        echo $BRANCH_NAME
+        echo "BRANCH=$(echo ${BRANCH_NAME})" >> $GITHUB_ENV
+
+    - if: ${{ matrix.node-version == '14.x' }}
+      name: Create the Badge
+      uses: schneegans/dynamic-badges-action@v1.0.0
+      with:
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: d551fd551fb6cb3687e1e775e627e039
+        filename: pattern-lib__${{ env.BRANCH }}.json
+        label: Code Coverage
+        message: ${{ env.COVERAGE }}
+        color: green
+        namedLogo: jest
+
+    - if: ${{ github.ref != 'refs/heads/main' && matrix.node-version == '14.x' && matrix.os == 'ubuntu-latest' }}
+      uses: romeovs/lcov-reporter-action@v0.2.16
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        lcov-file: ./tests/coverage/lcov.info

@@ -1,0 +1,80 @@
+{
+  "name": "@rupakheti/pattern-lib",
+  "version": "0.1.0",
+  "description": "A Javascript-based reusable design pattern library",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "compile": "tsc",
+    "build": "tsc && npm-pack-zip",
+    "clean": "rm -rf dist && rm -rf reports && rm -f @rupakhetipattern-lib.zip",
+    "watch": "tsc -w",
+    "pack": "npm-pack-zip",
+    "test": "jest --coverage",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "prepublishOnly": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crupakheti/pattern-lib.git"
+  },
+  "keywords": [
+    "design",
+    "pattern",
+    "node",
+    "library",
+    "javascript",
+    "typescript"
+  ],
+  "author": "Chandan R. Rupakheti",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/crupakheti/pattern-lib/issues"
+  },
+  "homepage": "https://github.com/crupakheti/pattern-lib#readme",
+  "devDependencies": {
+    "@types/jest": "^24.9.1",
+    "@types/node": "^12.19.15",
+    "@types/node-fetch": "^2.5.3",
+    "@typescript-eslint/eslint-plugin": "^4.15.1",
+    "@typescript-eslint/parser": "^4.28.0",
+    "eslint": "^7.7.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-standard-with-typescript": "^18.0.2",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest": "^24.1.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^4.2.5",
+    "jest": "^26.4.2",
+    "jest-extended": "^0.11.2",
+    "jest-html-reporter": "^3.1.3",
+    "jest-junit": "^8.0.0",
+    "jest-sonar-reporter": "~2.0.0",
+    "lint-staged": "^10.2.11",
+    "npm-pack-zip": "^1.2.9",
+    "prettier": "^2.1.0",
+    "ts-jest": "^26.2.0",
+    "ts-node": "^8.1.0",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {},
+  "jest-junit": {
+    "outputDirectory": "./reports",
+    "outputName": "junit.xml"
+  },
+  "jestSonar": {
+    "reportPath": "reports",
+    "reportFile": "sonar.xml",
+    "indent": 4
+  },
+  "engines": {
+    "node": ">=12"
+  }
+}
