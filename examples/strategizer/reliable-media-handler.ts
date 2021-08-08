@@ -1,5 +1,5 @@
 import { Text, SensoredText } from './model';
-import { Strategy } from '../../../src';
+import { Strategy } from '../../src';
 
 export class ReliableMediaHandler implements Strategy<Text, SensoredText> {
   evaluate(context: Text): boolean {

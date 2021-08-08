@@ -1,6 +1,11 @@
 import { Transformation } from './transformation';
 
 export class Transformer<T> {
+  /**
+   * Creates a new Transformer object.
+   *
+   * @param transformations The default transformations to be used by the transformer.
+   */
   constructor(protected readonly transformations = new Array<Transformation<T>>()) {}
 
   /**

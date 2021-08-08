@@ -6,6 +6,11 @@ import { Transformer } from './transformer';
  * to the supplied data **asynchronously**.
  */
 export class AsyncTransformer<T> extends Transformer<T> {
+  /**
+   * Creates a new AsyncTransformer object.
+   *
+   * @param transformations The default transformations to be used by the transformer.
+   */
   constructor(transformations = new Array<Transformation<T>>()) {
     super(transformations);
   }

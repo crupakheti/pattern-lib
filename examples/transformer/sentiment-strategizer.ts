@@ -1,4 +1,4 @@
-import { Strategizer } from '../../../src';
+import { Strategizer } from '../../src';
 import { CategorizedText } from './model';
 
 const happyWords = ['content', 'cheer', 'mer', 'jo', 'hap', 'smil', 'fav', 'deli', 'gle'];

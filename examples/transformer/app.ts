@@ -1,5 +1,5 @@
-import { Transformer } from '../../../src';
-import { Source } from '../strategy/model';
+import { Transformer } from '../../src';
+import { Source } from '../strategizer/model';
 import { CategorizedText } from './model';
 
 export class App {
