@@ -1,5 +1,5 @@
-import { Transformer } from '../../../src';
-import { sensorStrategizer } from '../strategy/sensor-strategizer';
+import { Transformer } from '../../src';
+import { sensorStrategizer } from '../strategizer/sensor-strategizer';
 import { CategorizedText } from './model';
 import { classificationStrategizer } from './classification-strategizer';
 import { sentimentStrategizer } from './sentiment-strategizer';

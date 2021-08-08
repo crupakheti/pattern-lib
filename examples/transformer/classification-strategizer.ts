@@ -1,4 +1,4 @@
-import { Strategizer } from '../../../src';
+import { Strategizer } from '../../src';
 import { CategorizedText } from './model';
 
 export const classificationStrategizer = new Strategizer<CategorizedText, void>([

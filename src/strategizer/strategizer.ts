@@ -6,6 +6,11 @@ import { Strategy } from './strategy';
  * @param T The data type of the context
  */
 export class Strategizer<I, O> {
+  /**
+   * Creates a new Strategizer object.
+   *
+   * @param strategies Default set of strategies to be used by the Strategizer
+   */
   constructor(protected readonly strategies = new Array<Strategy<I, O>>()) {}
 
   /**

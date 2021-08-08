@@ -1,4 +1,4 @@
-import { Strategizer } from '../../../src';
+import { Strategizer } from '../../src';
 import { Text, Source, SensoredText } from './model';
 
 export class App {

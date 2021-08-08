@@ -1,4 +1,4 @@
-import { SensoredText } from '../strategy/model';
+import { SensoredText } from '../strategizer/model';
 
 export type Classification = 'word' | 'paragraph' | 'page' | 'chapter' | 'book';
 export type Sentiment = 'happy' | 'sad' | 'flat';
