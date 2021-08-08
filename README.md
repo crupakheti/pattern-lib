@@ -1,6 +1,6 @@
 ![Pattern Lib Banner](docs/pattern-lib.png)
 
-<h2 align="center">A JS-based reusable design pattern library</h2>
+<h2 align="center">A javascript-based reusable design pattern library</h2>
 <p align="center">
     <a href="https://github.com/crupakheti/pattern-lib/actions/workflows/node.js.yml?query=workflow%3A%22Node.js+CI%22+branch%3Amain++">
         <img alt="Build Badge" src="https://github.com/crupakheti/pattern-lib/actions/workflows/node.js.yml/badge.svg"></img>
@@ -15,3 +15,5 @@
         <img alt="Code Style" src="https://img.shields.io/badge/Code_Style-prettier-ff69b4.svg?style=flat-square"></img>
     </a>            
 </p>
+
+Pattern Lib provides reusable design pattern componenets to be used in Javascript/Typescript projects.
