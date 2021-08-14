@@ -31,14 +31,14 @@ npm i @designpattern/pattern-lib
 
 ## Documentation and Examples
 
-We have contributed the following design patterns so far to the library. We have also contributed fully working examples for each of the patterns. Click on the links below to navigate to the detailed documentation or example usage for each.
+We have contributed the following design patterns so far to the library. We have also contributed working examples for each of the patterns. Please click on the links below to navigate to the detailed documentation or example usage for each.
 
 | Patterns        | Descriptions                               |           Docs           |            Examples             |
 | --------------- | ------------------------------------------ | :----------------------: | :-----------------------------: |
 | **Strategizer** | Provides configurable execution strategies | [docs](docs/strategizer) | [example](examples/strategizer) |
 | **Transformer** | Provides configurable transformations      | [docs](docs/transformer) | [example](examples/transformer) |
 
-You can run any of the patterns from the root of the project by running the `npx ts-node examples/<pattern-name>/main.ts` command. Here is an example command to run the `Strategizer` pattern:
+After you clone this project locally, you may try out any of the patterns from the root of this project by running the `npx ts-node examples/<pattern-name>/main.ts` command. Here is a sample command to run the `Strategizer` pattern:
 
 ```
 npx ts-node examples/strategizer/main.ts
