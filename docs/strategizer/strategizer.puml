@@ -1,0 +1,54 @@
+@startuml
+skinparam linetype ortho
+
+package client {
+    class App {
+        # strategizer: Strategizer<Text, CensuredText>
+
+        + constructor(strategizer: Strategizer<Text, CensuredText>)
+        + async run(source: string, content: string): Promise<string>
+    }
+    note right of App::run
+        const text: Text = { source, content };
+        const processed = await this.strategizer.execute(text);
+        return processed?.censuredContent || text.content;
+    end note
+
+    class ReliableSourceStrategy<Text, CensuredText> implements strategizer.Strategy {
+        + evaluate(context: Text): Promise<boolean>
+        + execute(context: Text): Promise<CensuredText>
+    }
+
+    class UnreliableSourceStrategy<Text, CensuredText> implements strategizer.Strategy {
+        + evaluate(context: Text): Promise<boolean>
+        + execute(context: Text): Promise<CensuredText>
+    }
+
+    App --> strategizer.Strategizer
+}
+
+package strategizer {
+    interface Strategy<I, O> {
+        + evaluate(context: I): Promise<boolean>
+        + execute(context: I): Promise<O>
+    }
+
+    class Strategizer<I, O> {
+        # strategies: Array<Strategy<I, O>>
+        
+        + register(strategy: Strategy<I, O>): Strategizer<I, O>
+        + unregister(strategy: Strategy<I, O>): boolean
+        + async execute(context: I): Promise<O | undefined>
+    }
+    note right of Strategizer::execute
+        for (const strategy of this.strategies) {
+            if (await strategy.evaluate(context)) {
+                return strategy.execute(context);
+            }
+        }
+        return undefined;
+    end note    
+
+    Strategizer --> "0..*" Strategy
+}
+@enduml

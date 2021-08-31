@@ -1,14 +1,12 @@
 import { Strategizer } from '../../src';
-import { Text, Source, SensoredText } from './model';
+import { Text, Source, CensuredText } from './model';
 
 export class App {
-  constructor(private strategizer: Strategizer<Text, SensoredText>) {}
+  constructor(private strategizer: Strategizer<Text, CensuredText>) {}
 
-  async run(source: Source, content: string) {
+  async run(source: Source, content: string): Promise<string> {
     const text: Text = { source, content };
-
-    console.log('Input: ', text);
     const processed = await this.strategizer.execute(text);
-    console.log('Output: ', processed);
+    return processed?.censuredContent || text.content;
   }
 }

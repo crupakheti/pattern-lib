@@ -1,11 +1,11 @@
 import { Transformation } from './transformation';
-import { Transformer } from './transformer';
+import { DefaultTransformer } from './default-transformer';
 
 /**
  * AsyncTransformer extends the behavior of {@link Transformer} by applying matching transformations
  * to the supplied data **asynchronously**.
  */
-export class AsyncTransformer<T> extends Transformer<T> {
+export class AsyncTransformer<T> extends DefaultTransformer<T> {
   /**
    * Creates a new AsyncTransformer object.
    *
