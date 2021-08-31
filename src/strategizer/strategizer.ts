@@ -5,24 +5,22 @@ import { Strategy } from './strategy';
  *
  * @param T The data type of the context
  */
-export class Strategizer<I, O> {
-  /**
-   * Creates a new Strategizer object.
-   *
-   * @param strategies Default set of strategies to be used by the Strategizer
-   */
-  constructor(protected readonly strategies = new Array<Strategy<I, O>>()) {}
-
+export interface Strategizer<I, O> {
   /**
    * Adds a new strategy
    *
    * @param strategy A {@link Strategy} object
    * @returns `this` to support fluent API
    */
-  register(strategy: Strategy<I, O>): Strategizer<I, O> {
-    this.strategies.push(strategy);
-    return this;
-  }
+  register(strategy: Strategy<I, O>): Strategizer<I, O>;
+
+  /**
+   * Removes an already registered strategy
+   *
+   * @param strategy The {@link Strategy} to be removed
+   * @returns `true` on success and `false` when the supplied strategy is not found
+   */
+  unregister(strategy: Strategy<I, O>): boolean;
 
   /**
    * Executes the first matching strategy in the series of registered strategies.
@@ -30,12 +28,5 @@ export class Strategizer<I, O> {
    * @param context The input context
    * @returns The ouput of the strategy if a matching strategy is found, otherwise, `undefined`
    */
-  async execute(context: I): Promise<O | undefined> {
-    for (const strategy of this.strategies) {
-      if (strategy.evaluate(context)) {
-        return strategy.execute(context);
-      }
-    }
-    return undefined;
-  }
+  execute(context: I): Promise<O | undefined>;
 }

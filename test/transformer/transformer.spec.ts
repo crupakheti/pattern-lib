@@ -1,9 +1,9 @@
-import { Transformation, Transformer } from '../../src';
+import { Transformation, DefaultTransformer } from '../../src';
 
 describe('Transformer', () => {
   describe('Construction', () => {
     it('should have empty transformations array intialized by default', () => {
-      const transformer = new Transformer();
+      const transformer = new DefaultTransformer();
       expect(transformer['transformations']).toEqual([]);
     });
 
@@ -15,14 +15,14 @@ describe('Transformer', () => {
         },
       ];
 
-      const transformer = new Transformer(transformations);
+      const transformer = new DefaultTransformer(transformations);
       expect(transformer['transformations']).toEqual(transformations);
     });
   });
 
   describe('Transformation Registration', () => {
     it('should be able to register a transformation', () => {
-      const transformer = new Transformer();
+      const transformer = new DefaultTransformer();
       const transformation = { evaluate: undefined as any, execute: undefined as any };
       const self = transformer.register(transformation);
 
@@ -34,7 +34,7 @@ describe('Transformer', () => {
   describe('Execution', () => {
     it('should execute a transformation whose condition statifies evaluation', async () => {
       const data = [1, 2, 3];
-      const transformer = new Transformer<Array<number>>()
+      const transformer = new DefaultTransformer<Array<number>>()
         .register({
           evaluate: (input) => input.length < 4,
           execute: async (input) => {

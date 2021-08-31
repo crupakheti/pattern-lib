@@ -1,23 +1,21 @@
 import { Transformation } from './transformation';
 
-export class Transformer<T> {
-  /**
-   * Creates a new Transformer object.
-   *
-   * @param transformations The default transformations to be used by the transformer.
-   */
-  constructor(protected readonly transformations = new Array<Transformation<T>>()) {}
-
+export interface Transformer<T> {
   /**
    * Adds a new transformation
    *
    * @param transformation A {@link Transformation} object
    * @returns `this` to support fluent API
    */
-  register(transformation: Transformation<T>): Transformer<T> {
-    this.transformations.push(transformation);
-    return this;
-  }
+  register(transformation: Transformation<T>): Transformer<T>;
+
+  /**
+   * Removes an already registered strategy
+   *
+   * @param strategy The {@link Strategy} to be removed
+   * @returns `true` on success and `false` when the supplied strategy is not found
+   */
+  unregister(transformation: Transformation<T>): boolean;
 
   /**
    * Applies a sequence of matching transformations on the supplied data.
@@ -25,11 +23,5 @@ export class Transformer<T> {
    * @param data The input to transformer
    * @returns A void promise when the execution completes
    */
-  async execute(data: T): Promise<void> {
-    for (const transformation of this.transformations) {
-      if (transformation.evaluate(data)) {
-        await transformation.execute(data);
-      }
-    }
-  }
+  execute(data: T): Promise<void>;
 }
