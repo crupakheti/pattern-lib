@@ -5,6 +5,6 @@ export interface Text {
   source: Source;
 }
 
-export interface SensoredText extends Text {
-  sensored?: string;
+export interface CensuredText extends Text {
+  censuredContent?: string;
 }
