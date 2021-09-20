@@ -19,31 +19,30 @@ class Orange implements Fruit {
 describe('Factory', () => {
   describe('Construction', () => {
     it('should store the strategizer when factory gets created', () => {
-      const strategizer = new DefaultStrategizer<string, Fruit>().register({
+      const strategy: Strategy<string, Fruit> = {
         evaluate: async (type) => type === 'apple',
         execute: async (_) => new Apple(),
-      });
+      };
+      const strategizer = DefaultStrategizer.create<string, Fruit>().register(strategy);
 
-      const factory = new DefaultFactory([], strategizer);
-      expect(factory['strategizer']).toBe(strategizer);
+      const factory = DefaultFactory.create([], strategizer);
+      expect(factory.registrations).toEqual([strategy]);
     });
 
-    it('should use supplied strategies in the strategizer when factory gets created', () => {
-      const strategies: Array<Strategy<string, Fruit>> = [
-        {
-          evaluate: async (type) => type === 'apple',
-          execute: async (_) => new Apple(),
-        },
-      ];
+    it('should store the strategies when factory gets created', () => {
+      const strategy: Strategy<string, Fruit> = {
+        evaluate: async (type) => type === 'apple',
+        execute: async (_) => new Apple(),
+      };
 
-      const factory = new DefaultFactory(strategies);
-      expect((factory['strategizer'] as any)['strategies']).toBe(strategies);
+      const factory = DefaultFactory.create([strategy]);
+      expect(factory.registrations).toEqual([strategy]);
     });
   });
 
   describe('Strategy Registration', () => {
     it('should be able to register and unregister a strategy', () => {
-      const factory = new DefaultFactory();
+      const factory = DefaultFactory.create();
       const strategy = { evaluate: undefined as any, execute: undefined as any };
 
       const self = factory.register(strategy);
@@ -61,7 +60,7 @@ describe('Factory', () => {
     let factory: Factory<string, Fruit>;
 
     beforeEach(() => {
-      const strategizer = new DefaultStrategizer<string, Fruit>()
+      factory = DefaultFactory.create<string, Fruit>()
         .register({
           evaluate: async (type) => type === 'apple',
           execute: async (_) => new Apple(),
@@ -70,17 +69,15 @@ describe('Factory', () => {
           evaluate: async (type) => type === 'orange',
           execute: async (_) => new Orange(),
         });
-
-      factory = new DefaultFactory([], strategizer);
     });
 
     it('should create a new object when a strategy is available', async () => {
-      const fruit = await factory.create('orange');
+      const fruit = await factory.createObject('orange');
       expect(fruit?.getColor()).toEqual('orange');
     });
 
     it('should return undefined when a strategy is not available', async () => {
-      const fruit = await factory.create('kiwi');
+      const fruit = await factory.createObject('kiwi');
       expect(fruit).toBe(undefined);
     });
   });

@@ -1,26 +1,20 @@
+import { Registry } from '../registration';
 import { Strategy } from './strategy';
 
 /**
  * Strategizer evaluates the context and executes a matching {@link Strategy}.
  *
- * @param T The data type of the context
+ * @typeParam I The data type of the context
+ * @typeParam O The output type returned after executing the strategy
  */
-export interface Strategizer<I, O> {
+export interface Strategizer<I, O> extends Registry<Strategy<I, O>> {
   /**
-   * Adds a new strategy
+   * Registers a strategy to the strategizer
    *
-   * @param strategy A {@link Strategy} object
-   * @returns `this` to support fluent API
+   * @param strategy The strategy to be registered
+   * @returns The strategizer object itself
    */
   register(strategy: Strategy<I, O>): Strategizer<I, O>;
-
-  /**
-   * Removes an already registered strategy
-   *
-   * @param strategy The {@link Strategy} to be removed
-   * @returns `true` on success and `false` when the supplied strategy is not found
-   */
-  unregister(strategy: Strategy<I, O>): boolean;
 
   /**
    * Executes the first matching strategy in the series of registered strategies.

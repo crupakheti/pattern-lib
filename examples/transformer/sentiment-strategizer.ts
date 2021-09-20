@@ -1,4 +1,4 @@
-import { Strategizer } from '../../src';
+import { DefaultStrategizer } from '../../src';
 import { CategorizedText } from './model';
 
 const happyWords = ['content', 'cheer', 'mer', 'jo', 'hap', 'smil', 'fav', 'deli', 'gle'];
@@ -14,21 +14,21 @@ function contains(text: string, words: Array<string>): boolean {
   return false;
 }
 
-export const sentimentStrategizer = new Strategizer<CategorizedText, void>([
+export const sentimentStrategizer = DefaultStrategizer.create<CategorizedText, void>([
   {
-    evaluate: (text) => contains(text.content, happyWords),
+    evaluate: async (text) => contains(text.content, happyWords),
     execute: async (text) => {
       text.sentiment = 'happy';
     },
   },
   {
-    evaluate: (text) => contains(text.content, sadWords),
+    evaluate: async (text) => contains(text.content, sadWords),
     execute: async (text) => {
       text.sentiment = 'sad';
     },
   },
   {
-    evaluate: (_) => true,
+    evaluate: async (_) => true,
     execute: async (text) => {
       text.sentiment = 'flat';
     },

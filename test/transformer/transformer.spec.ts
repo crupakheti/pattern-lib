@@ -3,8 +3,8 @@ import { Transformation, DefaultTransformer } from '../../src';
 describe('Transformer', () => {
   describe('Construction', () => {
     it('should have empty transformations array intialized by default', () => {
-      const transformer = new DefaultTransformer();
-      expect(transformer['transformations']).toEqual([]);
+      const transformer = DefaultTransformer.create();
+      expect(transformer.registrations).toEqual([]);
     });
 
     it('should be able to intialize a transformer with default transformations', () => {
@@ -15,34 +15,38 @@ describe('Transformer', () => {
         },
       ];
 
-      const transformer = new DefaultTransformer(transformations);
-      expect(transformer['transformations']).toEqual(transformations);
+      const transformer = DefaultTransformer.create(transformations);
+      expect(transformer.registrations).toEqual(transformations);
     });
   });
 
   describe('Transformation Registration', () => {
-    it('should be able to register a transformation', () => {
-      const transformer = new DefaultTransformer();
+    it('should be able to register and unregister a transformation', () => {
+      const transformer = DefaultTransformer.create();
       const transformation = { evaluate: undefined as any, execute: undefined as any };
       const self = transformer.register(transformation);
 
       expect(self).toBe(transformer);
-      expect(transformer['transformations']).toEqual([transformation]);
+      expect(transformer.registrations).toEqual([transformation]);
+
+      const result = transformer.unregister(transformation);
+      expect(result).toBe(true);
+      expect(transformer.registrations).toEqual([]);
     });
   });
 
   describe('Execution', () => {
     it('should execute a transformation whose condition statifies evaluation', async () => {
       const data = [1, 2, 3];
-      const transformer = new DefaultTransformer<Array<number>>()
+      const transformer = DefaultTransformer.create<Array<number>>()
         .register({
-          evaluate: (input) => input.length < 4,
+          evaluate: async (input) => input.length < 4,
           execute: async (input) => {
             input.push(4);
           },
         })
         .register({
-          evaluate: (input) => input.length > 5,
+          evaluate: async (input) => input.length > 5,
           execute: async (input) => {
             input.push(5);
           },

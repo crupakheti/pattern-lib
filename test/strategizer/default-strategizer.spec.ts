@@ -1,11 +1,10 @@
-import { Strategy } from '../../src';
-import { DefaultStrategizer } from '../../src';
+import { Strategy, Strategizer, DefaultStrategizer } from '../../src';
 
 describe('DefaultStrategizer', () => {
   describe('Construction', () => {
     it('should have empty strategy array intialized by default', () => {
-      const strategizer = new DefaultStrategizer();
-      expect(strategizer['strategies']).toEqual([]);
+      const strategizer = DefaultStrategizer.create() as DefaultStrategizer<unknown, unknown>;
+      expect(strategizer.registrations).toEqual([]);
     });
 
     it('should be able to intialize strategizer with default strategies', () => {
@@ -16,23 +15,23 @@ describe('DefaultStrategizer', () => {
         },
       ];
 
-      const strategizer = new DefaultStrategizer(strategies);
-      expect(strategizer['strategies']).toEqual(strategies);
+      const strategizer = DefaultStrategizer.create(strategies) as DefaultStrategizer<unknown, unknown>;
+      expect(strategizer.registrations).toEqual(strategies);
     });
   });
 
   describe('Strategy Registration', () => {
     it('should be able to register a strategy', () => {
-      const strategizer = new DefaultStrategizer();
+      const strategizer = DefaultStrategizer.create() as DefaultStrategizer<unknown, unknown>;
       const strategy = { evaluate: undefined as any, execute: undefined as any };
       const self = strategizer.register(strategy);
 
       expect(self).toBe(strategizer);
-      expect(strategizer['strategies']).toEqual([strategy]);
+      expect(strategizer.registrations).toEqual([strategy]);
     });
 
     it('should be able to unregister a strategy', () => {
-      const strategizer = new DefaultStrategizer();
+      const strategizer = DefaultStrategizer.create();
       const strategy = { evaluate: undefined as any, execute: undefined as any };
       strategizer.register(strategy);
 
@@ -45,10 +44,10 @@ describe('DefaultStrategizer', () => {
   });
 
   describe('Execution', () => {
-    let strategizer: DefaultStrategizer<string, string>;
+    let strategizer: Strategizer<string, string>;
 
     it('should execute a strategy whose condition satisfies evaluation', async () => {
-      strategizer = new DefaultStrategizer<string, string>()
+      strategizer = DefaultStrategizer.create<string, string>()
         .register({
           evaluate: async (input) => input === 'identity',
           execute: async (input) => Promise.resolve(input),
@@ -66,7 +65,7 @@ describe('DefaultStrategizer', () => {
     });
 
     it('should return udefined when no strategies are applicable', async () => {
-      strategizer = new DefaultStrategizer<string, string>().register({
+      strategizer = DefaultStrategizer.create<string, string>().register({
         evaluate: async (input) => input === 'identity',
         execute: async (input) => Promise.resolve(input),
       });
