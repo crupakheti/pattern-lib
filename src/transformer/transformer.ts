@@ -1,21 +1,19 @@
+import { Registry } from '../registration';
 import { Transformation } from './transformation';
 
-export interface Transformer<T> {
+/**
+ * `Transformer` applies data transformations algorithms defined by the {@link Transformation} interface.
+ * The `Transformation` objects are registered onto the transformer and only those transformation are executed
+ * whose evaluations ({@link Transformation.evaluate}) returns `true`.
+ */
+export interface Transformer<T> extends Registry<Transformation<T>> {
   /**
-   * Adds a new transformation
+   * Registers a {@link Transformation} to the transformer
    *
-   * @param transformation A {@link Transformation} object
-   * @returns `this` to support fluent API
+   * @param transformation The transformation to be registered
+   * @returns The `Transformer` object itself
    */
   register(transformation: Transformation<T>): Transformer<T>;
-
-  /**
-   * Removes an already registered strategy
-   *
-   * @param strategy The {@link Strategy} to be removed
-   * @returns `true` on success and `false` when the supplied strategy is not found
-   */
-  unregister(transformation: Transformation<T>): boolean;
 
   /**
    * Applies a sequence of matching transformations on the supplied data.

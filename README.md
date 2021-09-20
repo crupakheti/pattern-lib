@@ -37,11 +37,12 @@ We have contributed the following design patterns so far to the library. We have
 | --------------- | ------------------------------------------ | :----------------------: | :-----------------------------: |
 | **Strategizer** | Provides configurable execution strategies | [docs](docs/strategizer) | [example](examples/strategizer) |
 | **Transformer** | Provides configurable transformations      | [docs](docs/transformer) | [example](examples/transformer) |
+| **Factory**     | Provides configurable factory              |   [docs](docs/factory)   |   [example](examples/factory)   |
 
-You can run any of the patterns from the root of the project by running the `npx ts-node examples/<pattern-name>/main.ts` command. Here is an example command to run the `Strategizer` pattern:
+You can run any of the patterns from the root of the project by running the `npm run eg examples/<pattern-name>` command. Here is an example command to run the `Strategizer` pattern:
 
 ```
-npx ts-node examples/strategizer/main.ts
+npm run eg examples/strategizer
 ```
 
 ## Contributing
